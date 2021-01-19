@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/home/black/Dev/.virtualenvs/django-crud-example/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "restructuredtext.confPath": "${workspaceFolder}/docs"
+}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Todos{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">{{ todo.title }}</h1>
+        <p class="lead">{{ todo.description }}</p>
+        <hr class="my-4">
+        <p>Prioridad:</p>
+        <p class="lead ml-3">{{ todo.priority }}</p>
+        <p>Fecha Creación:</p>
+        <p class="lead ml-3">{{ todo.created_at }}</p>
+        <p class="lead">
+            <a 
+                class="btn btn-primary btn-lg"
+                href="{% url 'todos:list' %}"
+                role="button"
+                >
+                Regresar
+            </a>
+        </p>
+    </div>
+{% endblock %}

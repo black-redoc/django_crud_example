@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Todos{% endblock %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <nav 
+        class="navbar navbar-light bg-info justify-content-center mb-4" style="border-radius:0.5rem;"
+        >
+        <a class="navbar-brand">
+            <h1>
+                {% if 'update' in request.path %}
+                    Editar Todo
+                {% else %}
+                    Crear Todo
+                {% endif %}
+            </h1>
+        </a>
+    </nav>
+
+    <div 
+        style="width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;"
+        >
+        <form 
+            id="form" 
+            method="POST"
+            {% if "update" in request.path %} 
+                action="{{ request.path }}" 
+            {% else %} 
+                action="{% url 'todos:create' %}" 
+            {% endif %}
+            style="width:500px"
+            >
+            {% csrf_token %}
+            {% crispy form %}
+            <div>
+                <button 
+                    id="btnSubmit"
+                    style="width:100px"
+                    type="submit"
+                    class="btn btn-primary"
+                    >
+                    Guardar
+                </button>
+                <a 
+                    style="width:100px"
+                    href="{% url 'todos:list' %}"
+                    class="btn btn-danger"
+                    >
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        const btnSubmit = document.getElementById("btnSubmit");
+        const form = document.getElementById("form");
+
+        btnSubmit.onclick = () => {
+            form.submit();
+        }
+    </script>
+{% endblock %}
